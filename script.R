@@ -5,9 +5,16 @@
 
 library(ssPopModel)
 
-
+#John
 path.to.data <- "~/Documents/Armbrust/ssPopModel_sensitivity_test-master/ssPopModel_sensitivity_test_data"
 path.to.git.repository <- "~/Documents/Armbrust/ssPopModel_sensitivity_test-master"
+
+#Francois
+path.to.data <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test_data"
+path.to.git.repository <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test"
+
+
+
 
 # ## CREATE SIZE DISTRIBUTION
 # #1. to download the data (using DAT)
@@ -86,9 +93,42 @@ for(dt in seq(3, 30, by=1)) {
 list.output <- list.files("output", "dt=",full.names=T)
 DF <- NULL
 
+for(path.distribution in list.output){
+    #path.distribution <- list.output[1]
+    print(path.distribution)
+    load(path.distribution)
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]
+    dt <- as.numeric(unlist(list(strsplit(basename(path.distribution), "dt=")))[2])
+    if(origin == "biomass"){
+      params <- model2[,2][[1]]
+      gr <- model2[,2][[2]]
+    }
+    if(origin == "size"){
+      params <- model1[,2][[1]]
+      gr <- model1[,2][[2]]
+    }
+    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))
+    DF <- data.frame(rbind(DF, df))
+}
 
 
-## MERGE MODEL OUTPUT
+## PLOTTING (dt)
+par(mfrow=c(3,2),pty='m',cex=1.2)
+for(param in colnames(DF)[-c(1:3)]){
+    #param <- 'gmax'
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)
+    points(DF[which(DF$origin=="size"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')
+}
+
+
+
+
+
+
+
+
+## MERGE MODEL OUTPUT (size)
 list.output  <- list.files("output", "modeloutput",full.names=T)
 DF <- NULL
 
@@ -109,16 +149,6 @@ for(path.distribution in list.output){
     df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))
     DF <- data.frame(rbind(DF, df))
 }
-
-
-## PLOTTING (dt)
-par(mfrow=c(3,2))
-for(param in colnames(DF)[-c(1:2)]){
-    plot.ts(DF[which(DF$origin=="biomass"),param],
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)
-    points(DF[which(DF$origin=="size"),param],col=2,type='p')
-}
-
 
 
 ## PLOTTING
