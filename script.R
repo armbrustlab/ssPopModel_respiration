@@ -34,7 +34,7 @@ Par <- read.csv("Par.csv")
 
 
 ## ESTIMATE GROWTH RATE
-list.dist  <- list.files(".", "size.distribution_Prochlorococcus")
+list.dist  <- list.files("input", "size.distribution_Prochlorococcus",full.names=T)
 
 for(path.distribution in list.dist){
           #path.distribution <- list.dist[1]
@@ -62,7 +62,7 @@ for(path.distribution in list.dist){
 
 
 ## MERGE MODEL OUTPUT
-list.output  <- list.files("output", "modeloutput")
+list.output  <- list.files("output", "modeloutput",full.names=T)
 
 DF <- NULL
 for(path.distribution in list.output){
@@ -70,7 +70,7 @@ for(path.distribution in list.output){
     print(path.distribution)
     load(path.distribution)
     size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])
-    origin <- unlist(list(strsplit(path.distribution, "_")))[1]
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]
     if(origin == "biomass"){
       params <- model2[,2][[1]]
       gr <- model2[,2][[2]]
@@ -87,12 +87,12 @@ for(path.distribution in list.output){
 
 
 ## PLOTTING
-par(mfrow=c(3,2))
+par(mfrow=c(3,2),pty='m',cex=1.2)
 for(param in colnames(DF)[-c(1:2)]){
     #param <- 'gmax'
-    plot(DF[1:23,"size"], DF[1:23,param], ylim=c(range(DF[,param])),type='o',main=paste(param),ylab=NA, xlab=NA)
-    points(DF[24:46,"size"], DF[24:46,param],col=2,type='o')
+    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)
+    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')
 }
 
-plot(DF[1:23,"size"], DF[1:23,param]-DF[24:46,param],type='o',main=paste(param),ylab=NA, xlab=NA)
-abline(h=0)
+par(mfrow=c(1,1),cex=1.2)
+plot(DF[which(DF$origin=="biomass"),"size"], abs(DF[which(DF$origin=="biomass"),param]-DF[which(DF$origin=="size"),param]),type='p',main=paste(param),ylab=NA, xlab=NA,cex=2)
