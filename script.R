@@ -6,8 +6,8 @@
 library(ssPopModel)
 
 
-path.to.data <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test/ssPopModel_sensitivity_test_data"
-path.to.git.repository <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test"
+path.to.data <- "~/Documents/Armbrust/ssPopModel_sensitivity_test-master/ssPopModel_sensitivity_test_data"
+path.to.git.repository <- "~/Documents/Armbrust/ssPopModel_sensitivity_test-master"
 
 # ## CREATE SIZE DISTRIBUTION
 # #1. to download the data (using DAT)
@@ -59,12 +59,39 @@ for(path.distribution in list.dist){
 
 
 
+## Run model varying dt, width at 0.10
+
+list.dist.10 <- list.dist[59]
+
+for(dt in seq(3, 30, by=1)) {
+    print(paste0("Time = ", dt))
+    load(list.dist.10)
+    freq.distribution2 <- distribution[[2]][37:61] # biomass data for 1 day only
+    freq.distribution1 <- distribution[[1]][37:61] # size data for 1 day only
+
+    #plot.size.distribution(freq.distribution2, mode="log", type="l", lwd=2)
+
+    Ntot <- distribution[[3]][37:61]
+    t <- 1
+
+    # 1. calculating division rate based on biomass
+    model2 <- run.ssPopModel(freq.distribution2, Ntot, Par, time.delay=t, dt=dt)
+    save(model2, file=paste0('output/biomass_modeloutput_0.10_dt=', dt))
+    # 2. calculating division rate based on size
+    model1 <- run.ssPopModel(freq.distribution1, Ntot, Par, time.delay=t, dt=dt)
+    save(model1, file=paste0('output/size_modeloutput_0.10_dt=', dt))
+}
+
+## MERGE MODEL OUTPUT (dt)
+list.output <- list.files("output", "dt=",full.names=T)
+DF <- NULL
+
 
 
 ## MERGE MODEL OUTPUT
 list.output  <- list.files("output", "modeloutput",full.names=T)
-
 DF <- NULL
+
 for(path.distribution in list.output){
     #path.distribution <- list.output[1]
     print(path.distribution)
@@ -83,6 +110,14 @@ for(path.distribution in list.output){
     DF <- data.frame(rbind(DF, df))
 }
 
+
+## PLOTTING (dt)
+par(mfrow=c(3,2))
+for(param in colnames(DF)[-c(1:2)]){
+    plot.ts(DF[which(DF$origin=="biomass"),param],
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)
+    points(DF[which(DF$origin=="size"),param],col=2,type='p')
+}
 
 
 
