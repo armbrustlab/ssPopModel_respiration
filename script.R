@@ -3,18 +3,39 @@
 # Then, type in the terminal: R CMD INSTALL ssPopModel
 # NB: ssPopModel requires the package DEoptim to be installed, so make sure to install DEoptim package first
 
-
 library(ssPopModel)
 
-path.to.data <- "~/Desktop/model_test/"
 
-setwd(path.to.data)
+path.to.data <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test/ssPopModel_sensitivity_test_data"
+path.to.git.repository <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test"
+
+# ## CREATE SIZE DISTRIBUTION
+# #1. to download the data (using DAT)
+# dat://456f261260e4ae8af7e7dc8b97fdabfdc770f561771e844888b1ef7f59a507ec
+#
+# #2. calculate size distrubution
+# setwd(path.to.data)
+# popname <- "prochloro"
+# time.interval <- 60 #minutes
+# opp.dir <- "SCOPE_6_opp"
+# vct.dir <- "SCOPE_6_vct"
+# db <- "SCOPE_6.db"
+# inst <- "740"
+#
+# for(width in seq(0.045,0.10,by=0.001)){
+#   distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, volume.width=width, time.interval = time.interval)
+#   save(distribution,file=paste0(path.to.git.repository,"/input/size.distribution_Prochlorococcus_",width))
+# }
+
+
+
+setwd(path.to.git.repository)
 Par <- read.csv("Par.csv")
-
-list.dist  <- list.files(".", "size.distribution_Prochlorococcus")
 
 
 ## ESTIMATE GROWTH RATE
+list.dist  <- list.files(".", "size.distribution_Prochlorococcus")
+
 for(path.distribution in list.dist){
           #path.distribution <- list.dist[1]
           print(path.distribution)
@@ -29,10 +50,10 @@ for(path.distribution in list.dist){
           t <- 1
             # 1. calculating division rate based on biomass
             model2 <- run.ssPopModel(freq.distribution2, Ntot, Par, time.delay=t, dt=10)
-              save(model2, file=paste0('biomass_modeloutput_',size))
+              save(model2, file=paste0('output/biomass_modeloutput_',size))
             # 2. calculating division rate based on size
             model1 <- run.ssPopModel(freq.distribution1, Ntot, Par, time.delay=t, dt=10)
-              save(model1, file=paste0('size_modeloutput_',size))
+              save(model1, file=paste0('output/size_modeloutput_',size))
 
 }
 
@@ -41,7 +62,8 @@ for(path.distribution in list.dist){
 
 
 ## MERGE MODEL OUTPUT
-list.output  <- list.files(".", "modeloutput")
+list.output  <- list.files("output", "modeloutput")
+
 DF <- NULL
 for(path.distribution in list.output){
     #path.distribution <- list.output[1]
