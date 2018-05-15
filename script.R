@@ -6,8 +6,8 @@
 library(ssPopModel)
 
 #John
-path.to.data <- "~/Documents/Armbrust/ssPopModel_sensitivity_test-master/ssPopModel_sensitivity_test_data"
-path.to.git.repository <- "~/Documents/Armbrust/ssPopModel_sensitivity_test-master"
+path.to.data <- "~/ssPopModel_sensitivity_test/ssPopModel_sensitivity_test_data"
+path.to.git.repository <- "~/ssPopModel_sensitivity_test"
 
 #Francois
 path.to.data <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test_data"
@@ -70,24 +70,25 @@ for(path.distribution in list.dist){
 
 list.dist.10 <- list.dist[59]
 
-for(dt in seq(3, 30, by=1)) {
-    print(paste0("Time = ", dt))
-    load(list.dist.10)
-    freq.distribution2 <- distribution[[2]][37:61] # biomass data for 1 day only
-    freq.distribution1 <- distribution[[1]][37:61] # size data for 1 day only
 
-    #plot.size.distribution(freq.distribution2, mode="log", type="l", lwd=2)
+    for(dt in seq(3, 30, by=1)) {
+        print(paste0("Time = ", dt))
+        load(list.dist.10)
+        freq.distribution2 <- distribution[[2]][37:61] # biomass data for 1 day only
+        freq.distribution1 <- distribution[[1]][37:61] # size data for 1 day only
 
-    Ntot <- distribution[[3]][37:61]
-    t <- 1
+        #plot.size.distribution(freq.distribution2, mode="log", type="l", lwd=2)
 
-    # 1. calculating division rate based on biomass
-    model2 <- run.ssPopModel(freq.distribution2, Ntot, Par, time.delay=t, dt=dt)
-    save(model2, file=paste0('output/biomass_modeloutput_0.10_dt=', dt))
-    # 2. calculating division rate based on size
-    model1 <- run.ssPopModel(freq.distribution1, Ntot, Par, time.delay=t, dt=dt)
-    save(model1, file=paste0('output/size_modeloutput_0.10_dt=', dt))
-}
+        Ntot <- distribution[[3]][37:61]
+        t <- 1
+
+        # 1. calculating division rate based on biomass
+        model2 <- run.ssPopModel(freq.distribution2, Ntot, Par, time.delay=t, dt=dt)
+        save(model2, file=paste0('output/biomass_modeloutput_0.10_dt=', dt))
+        # 2. calculating division rate based on size
+        model1 <- run.ssPopModel(freq.distribution1, Ntot, Par, time.delay=t, dt=dt)
+        save(model1, file=paste0('output/size_modeloutput_0.10_dt=', dt))
+    }
 
 ## MERGE MODEL OUTPUT (dt)
 list.output <- list.files("output", "dt=",full.names=T)
@@ -114,7 +115,7 @@ for(path.distribution in list.output){
 
 
 ## PLOTTING (dt)
-par(mfrow=c(3,2),pty='m',cex=1.2)
+par(mfrow=c(3,2),pty='m')
 for(param in colnames(DF)[-c(1:3)]){
     #param <- 'gmax'
     plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)
@@ -152,7 +153,7 @@ for(path.distribution in list.output){
 
 
 ## PLOTTING
-par(mfrow=c(3,2),pty='m',cex=1.2)
+par(mfrow=c(3,2),pty='m')
 for(param in colnames(DF)[-c(1:2)]){
     #param <- 'gmax'
     plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)

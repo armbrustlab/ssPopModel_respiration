@@ -1,0 +1,300 @@
+library(ssPopModel)
+path.to.data <- "~/ssPopModel_sensitivity_test_data"
+path.to.git.repository <- "~/ssPopModel_sensitivity_test-master"
+setwd(path.to.git.repository)
+path.to.git.repository <- "~/ssPopModel_sensitivity_test"
+setwd(path.to.git.repository)
+Par <- read.csv("Par.csv")
+list.output <- list.files("output", "dt=",full.names=T)
+DF <- NULL
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot.ts(DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot.ts(DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+DF
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    dt <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[4])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+DF
+warning()
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    dt <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[4])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+warnings()
+as.numeric(unlist(list(strsplit(path.distribution, "_")))
+)
+unlist(list(strsplit(basename(path.distribution), "_")))
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param])#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+DF
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+DF <- NULL
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param])#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+DF
+par(mfrow=c(3,2),pty='m',cex=1.2)#
+for(param in colnames(DF)[-c(1:2)]){#
+    #param <- 'gmax'#
+    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param])#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+colnames(DF)
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:9)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[c(1:9)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+list.output <- list.files("output", "dt=",full.names=T)
+DF <- NULL
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:2)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+colnames(DF)[-c(1:2)]
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:3)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],)#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2))#
+for(param in colnames(DF)[-c(1:3)]){#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
+    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+library(ssPopModel)
+#John#
+path.to.data <- "~/ssPopModel_sensitivity_test-master/ssPopModel_sensitivity_test_data"#
+path.to.git.repository <- "~/ssPopModel_sensitivity_test-master"
+setwd(path.to.git.repository)
+Par <- read.csv("Par.csv")
+path.to.data <- "~/ssPopModel_sensitivity_test/ssPopModel_sensitivity_test_data"
+path.to.git.repository <- "~/ssPopModel_sensitivity_test"
+setwd(path.to.git.repository)
+Par <- read.csv("Par.csv")
+list.dist.10 <- list.dist[59]
+list.output <- list.files("output", "dt=",full.names=T)
+DF <- NULL
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    dt <- as.numeric(unlist(list(strsplit(basename(path.distribution), "dt=")))[2])#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+par(mfrow=c(3,2),pty='m',cex=1.2)#
+for(param in colnames(DF)[-c(1:3)]){#
+    #param <- 'gmax'#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2),pty='m')#
+for(param in colnames(DF)[-c(1:3)]){#
+    #param <- 'gmax'#
+    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+list.output  <- list.files("output", "modeloutput",full.names=T)
+DF <- NULL
+for(path.distribution in list.output){#
+    #path.distribution <- list.output[1]#
+    print(path.distribution)#
+    load(path.distribution)#
+    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
+    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
+    if(origin == "biomass"){#
+      params <- model2[,2][[1]]#
+      gr <- model2[,2][[2]]#
+    }#
+    if(origin == "size"){#
+      params <- model1[,2][[1]]#
+      gr <- model1[,2][[2]]#
+    }#
+    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
+    DF <- data.frame(rbind(DF, df))#
+}
+par(mfrow=c(3,2),pty='m',cex=1.2)#
+for(param in colnames(DF)[-c(1:2)]){#
+    #param <- 'gmax'#
+    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
+par(mfrow=c(3,2),pty='m')#
+for(param in colnames(DF)[-c(1:2)]){#
+    #param <- 'gmax'#
+    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
+    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')#
+}
