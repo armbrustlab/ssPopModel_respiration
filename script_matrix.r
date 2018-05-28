@@ -20,10 +20,11 @@ for(path.distribution in list.output){
     size <- as.numeric(file.name[3])
     dt <- as.numeric(file.name[4])
 
-    if(origin == "biomass"){
-        params <- model2[,2][[1]]
-        gr <- model2[,2][[2]]
-    }
+    # if(origin == "biomass"){
+    #     params <- model2[,2][[1]]
+    #     gr <- model2[,2][[2]]
+    # }
+
     if(origin == "size"){
         params <- model1[,2][[1]]
         gr <- model1[,2][[2]]
@@ -45,59 +46,47 @@ DF <- na.omit(DF)
 size <- sort(unique(DF$size))
 dt <- sort(unique(DF$dt))
 
-# Make a 59x69 matrix, for the (size)x(dt) data
-gr.matrix <- matrix(,nrow = length(dt), ncol = length(size))
-rownames(gr.matrix) <- dt
-colnames(gr.matrix) <- size
-
-# Build the matrix
-index = 1
-for (i in c(1:length(size))) {
-    for (j in c(1:length(dt))) {
-        if (DF$gr[index] < 0) {
-            gr.matrix[j,i] <- 0
+# this function creates a matrix from the DF table given
+# the column index
+create.matrix <- function(DF, index) {
+    # create the name of the matrix
+    parameter <- colnames(DF)[index]
+    name <- paste0(parameter, ".matrix")
+    # create the empty matrix
+    matrix <- matrix(,nrow = length(dt), ncol= length(size))
+    index = 1
+    # fill in the matrix
+    for (i in c(1:length(size))) {
+        for (j in c(1:length(dt))) {
+            # makes negative entires 0
+            if (DF[[parameter]][index] < 0) {
+                matrix[j,i] <- 0
+            }
+            else {
+                matrix[j,i] <- DF[[parameter]][index]
+            }
+            index <- index + 1
         }
-        else {
-            gr.matrix[j,i] <- DF$gr[index]
-        }
-        index <- index + 1
     }
+    rownames(matrix) <- dt
+    colnames(matrix) <- size
+
+    return (matrix)
 }
 
-# Resnorm
-res.matrix <- matrix(,nrow = length(dt), ncol = length(size))
-rownames(res.matrix) <- dt
-colnames(res.matrix) <- size
-
-# Build the matrix
-index = 1
-for (i in c(1:length(size))) {
-    for (j in c(1:length(dt))) {
-        if (DF$gr[index] < 0) {
-            res.matrix[j,i] <- 0
-        }
-        else {
-            res.matrix[j,i] <- DF$resnorm[index]
-        }
-        index <- index + 1
-    }
+# creates a matrix for each parameter
+for (i in c(4:9)) {
+    matrix <- create.matrix(DF, i)
+    name <- paste0(colnames(DF)[i], ".matrix")
+    # rownames(matrix) <- dt
+    # colnames(matrix) <- size
+    assign(name, matrix)
 }
 
-
-my_palette <- colorRampPalette(c("red", "yellow", "green"))(n = 299)
-
-#
-# # Build the heatmap
-# res.heatmap <- heatmap.2(res.matrix, Rowv=NA, Colv=NA, col = my_palette, scale="column", margins=c(5,10))
-#
-# # Build the heatmap
-# gr.heatmap <- heatmap.2(gr.matrix, Rowv=NA, Colv=NA, col = my_palette, scale="column", margins=c(5,10))
-library(plotly)
-heatmap <- plot_ly(z = res.matrix, type = "heatmap", colors = c("black", "white"))
-heatmap
-surface <- plot_ly(z = ~gr.matrix, xlab="width", ylab="dt") %>% add_surface()
-surface
-
-
+par(mfrow=c(3,2),pty='m')
+image(gmax.matrix, xlab="dt", ylab="size")
+image(dmax.matrix)
+image(b.matrix)
+image(E_star.matrix)
+image(resnorm.matrix)
 image(gr.matrix)
-image(res.matrix)
