@@ -90,6 +90,8 @@ list.dist.10 <- list.dist[59]
         save(model1, file=paste0('output/size_modeloutput_0.10_dt=', dt))
     }
 
+
+
 ## MERGE MODEL OUTPUT (dt)
 list.output <- list.files("output", "dt=",full.names=T)
 DF <- NULL
@@ -129,25 +131,22 @@ for(param in colnames(DF)[-c(1:3)]){
 
 
 
-## MERGE MODEL OUTPUT (size)
-list.output  <- list.files("output", "modeloutput",full.names=T)
+## MERGE MODEL OUTPUT (size + dt)
+list.output  <- list.files("output", "size_modeloutput",full.names=T)
 DF <- NULL
 
 for(path.distribution in list.output){
     #path.distribution <- list.output[1]
-    print(path.distribution)
+    #print(path.distribution)
     load(path.distribution)
     size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])
     origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]
-    if(origin == "biomass"){
-      params <- model2[,2][[1]]
-      gr <- model2[,2][[2]]
-    }
-    if(origin == "size"){
-      params <- model1[,2][[1]]
-      gr <- model1[,2][[2]]
-    }
-    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))
+    dt <-as.numeric(unlist(list(strsplit(basename(path.distribution), "_")))[4])
+    if(is.na(dt)) next
+    params <- model1[,2][[1]]
+    gr <- model1[,2][[2]]
+
+    df <- data.frame(origin, size, params,dt, gr=sum(gr,na.rm=T))
     DF <- data.frame(rbind(DF, df))
 }
 
@@ -162,3 +161,19 @@ for(param in colnames(DF)[-c(1:2)]){
 
 par(mfrow=c(1,1),cex=1.2)
 plot(DF[which(DF$origin=="biomass"),"size"], abs(DF[which(DF$origin=="biomass"),param]-DF[which(DF$origin=="size"),param]),type='p',main=paste(param),ylab=NA, xlab=NA,cex=2)
+
+#visualization
+library(akima)
+library(plotrix)
+cols <- colorRampPalette(c("blue4","royalblue4","deepskyblue3", "seagreen3", "yellow", "orangered2","darkred"))
+
+#plot(DF$size, DF$dt, col=cols(100)[cut(DF$gr,100)],pch=15, cex=1.4)
+
+data <- interp(DF$size, DF$dt, DF$gr, duplicate="mean", nx=100)
+data$z[which(data$z < 0)] <- NA # weird, min(data$z) < 0, need to check how is that even possible...
+
+image(data, col=cols(100))
+ylim <- par('usr')[c(3,4)]
+xlim <- par('usr')[c(1,2)]
+  color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(data$z), rect.col=cols(100), gradient='y',align='rb', cex=0.5)
+points(DF$size, DF$dt, col='white',pch=16, cex=0.5)
