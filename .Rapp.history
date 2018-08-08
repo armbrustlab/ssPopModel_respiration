@@ -1,300 +1,1570 @@
+hist(param.phyto[,"fsc_small_max"], n=100)
+quantile(param.phyto[,"fsc_small_max"],0.999)
+quantile(param.phyto[,"fsc_small_max"],0.99)
+quantile(param.phyto[,"fsc_small_min"],0.001)
+quantile(param.phyto[,"fsc_small_max"],0.999)
+quantile(param.phyto[,"fsc_small_max"],0.995)
+median(param.phyto[,"fsc_small_max"])*2
+median(param.phyto[,"fsc_small_max"])
+quantile(param.phyto[,"fsc_small_max"],0.95)
+quantile(param.phyto[,"fsc_small_max"],0.95)*2
+quantile(param.phyto[,"fsc_small_max"],0.99)*2
+c(quantile(param.phyto[,"fsc_small_min"],0.01)/2, quantile(param.phyto[,"fsc_small_max"],0.99)*2)
+param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01)/2, quantile(param.phyto[,"fsc_small_max"],0.99)*2)#
+             norm.param.range <- param.range / m.beads#
+             size.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(6.184*(norm.param.range^1.294),4)#
+             if(inst == 751) biomass.range <- round(6.998*(norm.param.range^1.692),4)
+2^seq(log2(size.range[1]), log2(size.range[2]), by=0.05)
+2^seq(log2(size.range[1]), log2(size.range[2]), by=0.1)
+2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.125)
+2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.1)
+2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.15)
+2^seq(log2(size.range[1]), log2(size.range[2]), by=0.1)
+2^seq(log2(size.range[1]), log2(size.range[2]), by=0.08)
+2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.15)
+length(volbins)
+length(biobins)
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.08)#
+             length(volbins)#
+             biobins <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.15)#
+             length(biobins)
+biobins <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.125)#
+             length(biobins)
+biobins <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.17)#
+             length(biobins)
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.08)#
+             length(volbins)#
+             biobins <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.17)#
+             length(biobins)
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.08)#
+             length(volbins)#
+             biobins <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.16)#
+             length(biobins)
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.1)#
+             length(volbins)
+2^seq(log2(biomass.range[1]), log2(biomass.range[2]), by=0.1)
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.125)#
+             length(volbins)
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.1)#
+             length(volbins)
+size.range
+biomass.range <- round(6.184*(norm.param.range^1.294),4)
+biomass.range
+volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.08)#
+             length(volbins)
+2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins))
+popname
+distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, time.interval = time.interval)
+save(distribution,file="~/Desktop/model_test/size.distribution_Prochlorococcus")
+plot.size.distribution(distribution[[2]], mode="log", type="l", lwd=2)
+save(distribution,file="~/Desktop/model_test/size.distribution_Prochlorococcus")
+load("~/Desktop/model_test/size.distribution_Prochlorococcus")
+plot.size.distribution(distribution[[2]], mode="log", type="l", lwd=2)
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
 library(ssPopModel)
-path.to.data <- "~/ssPopModel_sensitivity_test_data"
-path.to.git.repository <- "~/ssPopModel_sensitivity_test-master"
-setwd(path.to.git.repository)
-path.to.git.repository <- "~/ssPopModel_sensitivity_test"
-setwd(path.to.git.repository)
-Par <- read.csv("Par.csv")
-list.output <- list.files("output", "dt=",full.names=T)
-DF <- NULL
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot.ts(DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),param],col=2,type='p')#
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
+library(ssPopModel)
+time.interval <- 60#
+popname <- "prochloro"
+distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, time.interval = time.interval)
+require(popcycle)#
+#
+        # Get the time range#
+        stat <- get.stat.table(db, flag=TRUE)#
+        try(stat <- subset(stat, flag ==0), silent=T)#
+        stat$time <- as.POSIXct(stat$time,format="%FT%T",tz='GMT')#
+#
+          if(is.null(popname)){phyto.stat <- stat#
+              }else{phyto.stat <- subset(stat, pop == popname)}#
+#
+        time.range <- range(phyto.stat$time)#
+        time <- seq(time.range[1],time.range[2] , by=time.interval*60) # cut the time series according to time interval#
+        # Get the beads data#
+        # print(paste("obtaining the median ", param, "of beads for normalization"))#
+         m.beads <- median(subset(stat, pop =='beads' & time > time.range[1] & time < time.range[2])[,"fsc_small_mean"])#
+#
+        # Get Volbins#
+             # Get the volume range for 'phyto'#
+             #print(paste("obtaining the range in", param, "for", popname))#
+             param.phyto <- get.vct.stats.by.date(db, time.range[1], time.range[2])#
+#
+               if(is.null(popname)){param.phyto <- subset(param.phyto, pop!='beads')#
+                   }else{param.phyto <- subset(param.phyto, pop==popname)}#
+#
+             param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01), quantile(param.phyto[,"fsc_small_max"],0.99))#
+             norm.param.range <- param.range / m.beads#
+             size.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(6.184*(norm.param.range^1.294),4)#
+             if(inst == 751) biomass.range <- round(6.998*(norm.param.range^1.692),4)#
+#
+             volbins <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.04)#
+             biobins <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins))
+print(paste("generating", popname, "size distribution binned in", length(volbins), "size classes, in ",time.interval, "minutes time interval"))#
+#
+         i <- 0#
+        Vhist <- Bhist <- Ntot  <- Time <- NULL#
+        for( t in time){#
+#
+            # t <- time[133]#
+             message(round(100*i/length(time)), "% completed \r", appendLF=FALSE)#
+#
+            tryCatch({#
+            #get the opp for phyto#
+            t <- as.POSIXct(t, origin="1970-01-01", tz='GMT')#
+            stat.subset <- subset(stat, pop== popname & flag==0 & time >=t & time < t+60*time.interval)#
+            opp <- try(get.opp.by.file(opp.dir, stat.subset$file, quantile=50, vct.dir=vct.dir, pop=popname, channel='fsc_small'))#
+            if(class(opp) == "try-error" | nrow(opp) < 10){#
+                next#
+                }#
+#
+            # convert normalized FSC to Volume and Biomass#
+                norm.fsc <- opp[,"fsc_small"]/m.beads#
+                volume <- round(1.918*(norm.fsc^0.524),4)#
+                if(inst == 740) biomass <- round(6.184*(norm.fsc^1.294),4)#
+                if(inst == 751) biomass <- round(6.998*(norm.fsc^1.692),4)#
+#
+            # create the frequency distribution of Volume and Biomass#
+              dens <- hist(volume, breaks=volbins, plot=F)#
+              freq.dist <-  dens$density*diff(dens$breaks) # convert density to frequency#
+            Vhist <- data.frame(cbind(Vhist, freq.dist))#
+#
+              dens2 <- hist(biomass, breaks=biobins,plot=F)#
+              freq.dist2 <-  dens2$density*diff(dens2$breaks) # convert density to frequency#
+            Bhist <- data.frame(cbind(Bhist, freq.dist2))#
+#
+                n <- mean(stat.subset$abundance)#
+            Ntot <- data.frame(cbind(Ntot, n))#
+#
+            Time <- c(Time, t)#
+#
+            } , error = function(e) {print(paste("Encountered error at ", t))})#
+            i <-  i + 1#
+            flush.console()#
+        }
+colnames(Vhist) <- colnames(Bhist) <- colnames(Ntot) <- as.character(Time)#
+        rownames(Vhist) <- volbins#
+        rownames(Bhist) <- biobins#
+        rownames(Ntot) <- "Ntot"
+colnames(Vhist) <- colnames(Bhist) <- colnames(Ntot) <- as.character(Time)
+rownames(Vhist)
+volbins
+dens
+volbins <- dens$mids#
+        biobins <- dens2$mids
+colnames(Vhist) <- colnames(Bhist) <- colnames(Ntot) <- as.character(Time)#
+        rownames(Vhist) <- volbins#
+        rownames(Bhist) <- biobins
+rownames(Ntot) <- "Ntot"
+diff(volbins)
+diff(log2(volbins))
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
+library(ssPopModel)
+time.interval <- 60#
+popname <- "prochloro"
+distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, time.interval = time.interval)
+volbins.cut <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.04)
+# Get the time range#
+        stat <- get.stat.table(db, flag=TRUE)#
+        try(stat <- subset(stat, flag ==0), silent=T)#
+        stat$time <- as.POSIXct(stat$time,format="%FT%T",tz='GMT')#
+#
+          if(is.null(popname)){phyto.stat <- stat#
+              }else{phyto.stat <- subset(stat, pop == popname)}#
+#
+        time.range <- range(phyto.stat$time)#
+        time <- seq(time.range[1],time.range[2] , by=time.interval*60) # cut the time series according to time interval#
+        # Get the beads data#
+        # print(paste("obtaining the median ", param, "of beads for normalization"))#
+         m.beads <- median(subset(stat, pop =='beads' & time > time.range[1] & time < time.range[2])[,"fsc_small_mean"])#
+#
+        # Get Volbins#
+             # Get the volume range for 'phyto'#
+             #print(paste("obtaining the range in", param, "for", popname))#
+             param.phyto <- get.vct.stats.by.date(db, time.range[1], time.range[2])#
+#
+               if(is.null(popname)){param.phyto <- subset(param.phyto, pop!='beads')#
+                   }else{param.phyto <- subset(param.phyto, pop==popname)}#
+#
+             param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01), quantile(param.phyto[,"fsc_small_max"],0.99))#
+             norm.param.range <- param.range / m.beads#
+             size.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(6.184*(norm.param.range^1.294),4)#
+             if(inst == 751) biomass.range <- round(6.998*(norm.param.range^1.692),4)
+volbins.cut <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.04)
+volbins.cut
+biobins.cut <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins.cut))
+biobins.cut
+library(ssPopModel)#
+library(popcycle)
+time.interval <- 60#
+popname <- "prochloro"
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
+distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, time.interval = time.interval)
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"#
+#############################################
+### Get the range of 'param' for 'phyto' ####
+#############################################
+#
+size.distribution <- function(db, opp.dir, vct.dir, popname, time.interval = 60){#
+#
+    require(popcycle)#
+#
+        # Get the time range#
+        stat <- get.stat.table(db, flag=TRUE)#
+        try(stat <- subset(stat, flag ==0), silent=T)#
+        stat$time <- as.POSIXct(stat$time,format="%FT%T",tz='GMT')#
+#
+          if(is.null(popname)){phyto.stat <- stat#
+              }else{phyto.stat <- subset(stat, pop == popname)}#
+#
+        time.range <- range(phyto.stat$time)#
+        time <- seq(time.range[1],time.range[2] , by=time.interval*60) # cut the time series according to time interval#
+        # Get the beads data#
+        # print(paste("obtaining the median ", param, "of beads for normalization"))#
+         m.beads <- median(subset(stat, pop =='beads' & time > time.range[1] & time < time.range[2])[,"fsc_small_mean"])#
+#
+        # Get Volbins#
+             # Get the volume range for 'phyto'#
+             #print(paste("obtaining the range in", param, "for", popname))#
+             param.phyto <- get.vct.stats.by.date(db, time.range[1], time.range[2])#
+#
+               if(is.null(popname)){param.phyto <- subset(param.phyto, pop!='beads')#
+                   }else{param.phyto <- subset(param.phyto, pop==popname)}#
+#
+             param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01), quantile(param.phyto[,"fsc_small_max"],0.99))#
+             norm.param.range <- param.range / m.beads#
+             size.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(6.184*(norm.param.range^1.294),4)#
+             if(inst == 751) biomass.range <- round(6.998*(norm.param.range^1.692),4)#
+#
+             volbins.cut <- 2^seq(log2(size.range[1]), log2(size.range[2]), by=0.06)#
+             biobins.cut <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins.cut))#
+        ###################################
+        ### Generate SIZE distribution ####
+        ###################################
+        print(paste("generating", popname, "size distribution binned in", length(volbins.cut), "size classes, in ",time.interval, "minutes time interval"))#
+#
+         i <- 0#
+        Vhist <- Bhist <- Ntot  <- Time <- NULL#
+        for( t in time){#
+#
+            # t <- time[133]#
+             message(round(100*i/length(time)), "% completed \r", appendLF=FALSE)#
+#
+            tryCatch({#
+            #get the opp for phyto#
+            t <- as.POSIXct(t, origin="1970-01-01", tz='GMT')#
+            stat.subset <- subset(stat, pop== popname & flag==0 & time >=t & time < t+60*time.interval)#
+            opp <- try(get.opp.by.file(opp.dir, stat.subset$file, quantile=50, vct.dir=vct.dir, pop=popname, channel='fsc_small'))#
+            if(class(opp) == "try-error" | nrow(opp) < 10){#
+                next#
+                }#
+#
+            # convert normalized FSC to Volume and Biomass#
+                norm.fsc <- opp[,"fsc_small"]/m.beads#
+                volume <- round(1.918*(norm.fsc^0.524),4)#
+                if(inst == 740) biomass <- round(6.184*(norm.fsc^1.294),4)#
+                if(inst == 751) biomass <- round(6.998*(norm.fsc^1.692),4)#
+#
+            # create the frequency distribution of Volume and Biomass#
+              dens <- hist(volume, breaks=volbins.cut, plot=F)#
+              freq.dist <-  dens$density*diff(dens$breaks) # convert density to frequency#
+            Vhist <- data.frame(cbind(Vhist, freq.dist))#
+#
+              dens2 <- hist(biomass, breaks=biobins.cut,plot=F)#
+              freq.dist2 <-  dens2$density*diff(dens2$breaks) # convert density to frequency#
+            Bhist <- data.frame(cbind(Bhist, freq.dist2))#
+#
+                n <- mean(stat.subset$abundance)#
+            Ntot <- data.frame(cbind(Ntot, n))#
+#
+            Time <- c(Time, t)#
+#
+            } , error = function(e) {print(paste("Encountered error at ", t))})#
+            i <-  i + 1#
+            flush.console()#
+        }#
+        ########################
+        ### SAVE the output ####
+        ########################
+        volbins <- dens$mids#
+        biobins <- dens2$mids#
+#
+        colnames(Vhist) <- colnames(Bhist) <- colnames(Ntot) <- as.character(Time)#
+        rownames(Vhist) <- volbins#
+        rownames(Bhist) <- biobins#
+        rownames(Ntot) <- "Ntot"#
+#
+        distribution <- list()#
+            distribution[[1]] <- Vhist#
+            distribution[[2]] <- Bhist#
+            distribution[[3]] <- Ntot#
+#
+         print("done")#
+        return(distribution)#
+#
+        }#
+###############################
+### PLOT size distribution ####
+###############################
+plot.size.distribution <- function(freq.distribution, mode = c('log', 'lin'), ...){#
+#
+    require(rgl)#
+    jet.colors <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan", "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))#
+#
+    mode <- as.character(mode[1])#
+#
+    param <- freq.distribution#
+    percentile <- cut(unlist(param), 100)#
+#
+    # in linear scale#
+    if(mode =='lin'){#
+        plot3d(rep(as.numeric(row.names(param)), dim(param)[2]),#
+                rep(as.numeric(colnames(param)), each=dim(param)[1]) ,#
+                unlist(param),#
+                col=jet.colors(100)[percentile], xlab="size class", ylab="time", zlab="Frequency",...)#
+     }#
+    # in log scale#
+    if(mode =='log'){#
+        plot3d(log2(rep(as.numeric(row.names(param)), dim(param)[2])),#
+                rep(as.numeric(colnames(param)), each=dim(param)[1]) ,#
+                unlist(param),#
+                col=jet.colors(100)[percentile],  xlab="size class", ylab="time", zlab="Frequency",...)#
+    }#
 }
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot.ts(DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-DF
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    dt <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[4])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-DF
-warning()
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    dt <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[4])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-warnings()
-as.numeric(unlist(list(strsplit(path.distribution, "_")))
+library(ssPopModel)#
+library(popcycle)#
+#
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
+distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, time.interval = time.interval)
+library(ssPopModel)#
+library(popcycle)#
+#
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
+distribution <- size.distribution(db, opp.dir, vct.dir, popname=popname, time.interval = time.interval)
+path <- "/Volumes/GoogleDrive/My Drive/Gradient Program/Gradient 2/Data/instrument-files/shipdata_MGL1704/"#
+#
+par.list <- list.files(path, "-par.y", recursive=F, full.names=T)#
+PAR <- NULL#
+for(file in par.list){#
+    print(file)#
+    par  <- read.delim(paste(file),  header=FALSE)#
+    PAR <- rbind(PAR, par)#
+  }#
+   PAR <- PAR[-which(PAR[,3] == ">"),]#
+PAR$light <- as.numeric(t(data.frame(list(strsplit(as.character(PAR[,3]),"[,]"))))[,1])
+tsg.list <- list.files(path, "-tsgraw.y", recursive=F, full.names=T)#
+TSG <- NULL#
+for(file in par.list){#
+    print(file)#
+    tsg  <- read.delim(paste(file),  header=FALSE)#
+    TSG <- rbind(TSG, tsg)#
+  }#
+TSG$sal <- t(data.frame(list(strsplit(as.character(TSG[,3]),"[,]"))))[,1]#
+TSG$temp <- t(data.frame(list(strsplit(as.character(TSG[,3]),"[,]"))))[,1]#
+TSG$cond <- t(data.frame(list(strsplit(as.character(TSG[,3]),"[,]"))))[,1]
+library(popcycle)#
+library(googlesheets)#
+library(plotrix)#
+#
+x <- gs_title("SeaFlow\ instrument\ log", verbose = TRUE)#
+list <- gs_read(x)#
+cruise.list <- list$cruise
+path <- "/Volumes/GoogleDrive/My Drive/Gradient Program/Gradient 2/Data/instrument-files/shipdata_MGL1704/"
+par.list <- list.files(path, "-par.y", recursive=F, full.names=T)#
+PAR <- NULL#
+for(file in par.list){#
+    print(file)#
+    par  <- read.delim(paste(file),  header=FALSE)#
+    PAR <- rbind(PAR, par)#
+  }#
+   PAR <- PAR[-which(PAR[,3] == ">"),]#
+PAR$light <- as.numeric(t(data.frame(list(strsplit(as.character(PAR[,3]),"[,]"))))[,1])#
+tsg.list <- list.files(path, "-tsgraw.y", recursive=F, full.names=T)#
+TSG <- NULL#
+for(file in par.list){#
+    print(file)#
+    tsg  <- read.delim(paste(file),  header=FALSE)#
+    TSG <- rbind(TSG, tsg)#
+  }#
+TSG$sal <- t(data.frame(list(strsplit(as.character(TSG[,3]),"[,]"))))[,1]#
+TSG$temp <- t(data.frame(list(strsplit(as.character(TSG[,3]),"[,]"))))[,1]#
+TSG$cond <- t(data.frame(list(strsplit(as.character(TSG[,3]),"[,]"))))[,1]
+head(PAR)
+as.numeric(t(data.frame(list(strsplit(as.character(PAR[1,3]),"[,]"))))[,1])
+as.numeric(t(data.frame(list(strsplit(as.character(PAR[1,4]),"[,]"))))[,1])
+as.numeric(t(data.frame(list(strsplit(as.character(PAR[1,3]),"[,]"))))[,3])
+nrow(PAR)
+PAR$light <- as.numeric(t(data.frame(list(strsplit(as.character(PAR[,3]),"[,]"))))[,3])
+PAR[,1]
+PAR[1,]
+PAR[1,2]
+PAR[1,3]
+par.list
+plot(as.numeric(t(data.frame(list(strsplit(as.character(PAR[,3]),"[,]"))))[,3]))
+?density
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "~/Desktop/SCOPE_6/SCOPE_6_opp"#
+vct.dir <- "~/Desktop/SCOPE_6/SCOPE_6_vct"#
+db <- "~/Desktop/SCOPE_6/SCOPE_6.db"#
+inst <- "740"
+# Get the time range#
+        stat <- get.stat.table(db, flag=TRUE)#
+        try(stat <- subset(stat, flag ==0), silent=T)#
+        stat$time <- as.POSIXct(stat$time,format="%FT%T",tz='GMT')#
+#
+          if(is.null(popname)){phyto.stat <- stat#
+              }else{phyto.stat <- subset(stat, pop == popname)}#
+#
+        time.range <- range(phyto.stat$time)#
+        time <- seq(time.range[1],time.range[2] , by=time.interval*60) # cut the time series according to time interval#
+        # Get the beads data#
+        # print(paste("obtaining the median ", param, "of beads for normalization"))#
+         m.beads <- median(subset(stat, pop =='beads' & time > time.range[1] & time < time.range[2])[,"fsc_small_mean"])#
+#
+        # Get Volbins#
+             # Get the volume range for 'phyto'#
+             #print(paste("obtaining the range in", param, "for", popname))#
+             param.phyto <- get.vct.stats.by.date(db, time.range[1], time.range[2])#
+#
+               if(is.null(popname)){param.phyto <- subset(param.phyto, pop!='beads')#
+                   }else{param.phyto <- subset(param.phyto, pop==popname)}#
+#
+             param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01), quantile(param.phyto[,"fsc_small_max"],0.99))#
+             norm.param.range <- param.range / m.beads#
+             volume.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(2.251*(norm.param.range^1.143),4)#
+             if(inst == 751) biomass.range <- round(1.704*(norm.param.range^1.07),4)#
+             #biomass.range <- volume.range * 0.220 # Booth 1988 (Burbage & Binder found biomass.range <- 0.5 * norm.param.range ^(1/1.74))#
+#
+             volbins.cut <- 2^seq(log2(volume.range[1]), log2(volume.range[2]), by=volume.width)#
+             biobins.cut <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins.cut))
+volume.width=0.07
+# Get Volbins#
+             # Get the volume range for 'phyto'#
+             #print(paste("obtaining the range in", param, "for", popname))#
+             param.phyto <- get.vct.stats.by.date(db, time.range[1], time.range[2])#
+#
+               if(is.null(popname)){param.phyto <- subset(param.phyto, pop!='beads')#
+                   }else{param.phyto <- subset(param.phyto, pop==popname)}#
+#
+             param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01), quantile(param.phyto[,"fsc_small_max"],0.99))#
+             norm.param.range <- param.range / m.beads#
+             volume.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(2.251*(norm.param.range^1.143),4)#
+             if(inst == 751) biomass.range <- round(1.704*(norm.param.range^1.07),4)#
+             #biomass.range <- volume.range * 0.220 # Booth 1988 (Burbage & Binder found biomass.range <- 0.5 * norm.param.range ^(1/1.74))#
+#
+             volbins.cut <- 2^seq(log2(volume.range[1]), log2(volume.range[2]), by=volume.width)#
+             biobins.cut <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins.cut))
+i <- 0#
+        Vhist <- Bhist <- Ntot  <- Time <- NULL
+t <- time[133]#
+            t <- as.POSIXct(t, origin="1970-01-01", tz='GMT')#
+            stat.subset <- subset(stat, pop== popname & flag==0 & time >=t & time < t+60*time.interval)#
+            opp <- try(get.opp.by.file(opp.dir, stat.subset$file, quantile=50, vct.dir=vct.dir, pop=popname, channel='fsc_small'))#
+            if(class(opp) == "try-error" | nrow(opp) < 10){#
+                next#
+                }
+norm.fsc <- opp[,"fsc_small"]/m.beads#
+                volume <- round(1.918*(norm.fsc^0.524),4)#
+                  if(inst == 740) biomass <- round(2.251*(norm.fsc^1.143),4)#
+                  if(inst == 751) biomass <- round(1.704*(norm.fsc^1.07),4)#
+                  # biomass <- volume * 0.220#
+#
+            # create the frequency distribution of Volume and Biomass
+dens <- hist(volume, breaks=volbins.cut, plot=F)
+plot(dens)
+density(volume, cut=volbins, kernel='gaussian')
+dens <- density(volume, cut=volbins.cut, kernel='gaussian')
+plot(dens)
+dens
+str(dens)
+dens <- density(volume, n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')
+plot(dens)
+dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')
+plot(dens)
+dens <- hist(volume, breaks=volbins.cut, plot=T)
 )
-unlist(list(strsplit(basename(path.distribution), "_")))
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param])#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-DF
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-DF <- NULL
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param])#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-DF
-par(mfrow=c(3,2),pty='m',cex=1.2)#
-for(param in colnames(DF)[-c(1:2)]){#
-    #param <- 'gmax'#
-    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param])#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-colnames(DF)
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:9)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[c(1:9)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-list.output <- list.files("output", "dt=",full.names=T)
-DF <- NULL
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    dt <- as.numeric(unlist(list(strsplit(path.distribution, "=")))[2])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:2)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-colnames(DF)[-c(1:2)]
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:3)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],)#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2))#
-for(param in colnames(DF)[-c(1:3)]){#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param],#
-    ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-library(ssPopModel)
+plot(dens,type='l')
+plot(dens)
+plot(dens$x, dens$y)
+dens
+plot(dens$breaks, dens$density)
+dens$breaks
+plot(dens$mids, dens$density)
+plot(dens$mids, dens$density,type='l')
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density,type='l')
+dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              plot(dens)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density,type='l')
+plot(dens)
+dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              plot(dens)
+str(dens)
+plot(volbins.cut,dens$y,type='l')
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density,type='l')#
+              dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              lines(volbins.cut,dens$y,type='l')
+freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+              freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+              lines(volbins.cut,freq.dist,type='l')
+plot(dens$mids, dens$density,type='l')
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density,type='l')
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='l')
+dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+              freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+              lines(volbins.cut,freq.dist,type='l')
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='l')#
+              dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+              freq.dist <- freq.dist # normailize the frequency to 1#
+              lines(volbins.cut,freq.dist,type='l')
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='l')#
+              dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+              freq.dist <- freq.dist # normailize the frequency to 1
+lines(volbins.cut,freq.dist,type='l')
+sum(freq.dist)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='l')#
+              dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+              freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+              par(new=T) plot(volbins.cut,freq.dist,type='l',col=2)
+par(new=T) #
+              plot(volbins.cut,freq.dist,type='l',col=2)
+volume.width=0.02
+param.phyto <- get.vct.stats.by.date(db, time.range[1], time.range[2])#
+#
+               if(is.null(popname)){param.phyto <- subset(param.phyto, pop!='beads')#
+                   }else{param.phyto <- subset(param.phyto, pop==popname)}#
+#
+             param.range <- c(quantile(param.phyto[,"fsc_small_min"],0.01), quantile(param.phyto[,"fsc_small_max"],0.99))#
+             norm.param.range <- param.range / m.beads#
+             volume.range <- round(1.918*(norm.param.range^0.524),4)#
+             if(inst == 740) biomass.range <- round(2.251*(norm.param.range^1.143),4)#
+             if(inst == 751) biomass.range <- round(1.704*(norm.param.range^1.07),4)#
+             #biomass.range <- volume.range * 0.220 # Booth 1988 (Burbage & Binder found biomass.range <- 0.5 * norm.param.range ^(1/1.74))#
+#
+             volbins.cut <- 2^seq(log2(volume.range[1]), log2(volume.range[2]), by=volume.width)#
+             biobins.cut <- 2^seq(log2(biomass.range[1]), log2(biomass.range[2]), length.out=length(volbins.cut))
+# convert normalized FSC to Volume and Biomass#
+                norm.fsc <- opp[,"fsc_small"]/m.beads#
+                volume <- round(1.918*(norm.fsc^0.524),4)#
+                  if(inst == 740) biomass <- round(2.251*(norm.fsc^1.143),4)#
+                  if(inst == 751) biomass <- round(1.704*(norm.fsc^1.07),4)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='l')#
+              dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+              freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+              freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+              par(new=T) #
+              plot(volbins.cut,freq.dist,type='l',col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='l')#
+                dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(volbins.cut,freq.dist,type='l',col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o')#
+                dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(volbins.cut,freq.dist,type='o',col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o')#
+                dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens$y*diff(dens$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(volbins.cut,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o')#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(volbins.cut,freq.dist,type='o',col=2, xlim=range(dens$mids))
+volbins.cut
+plot(dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens2$x
+ency distribution of Volume and Biomass#
+              dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o')#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(dens2$x,freq.dist,type='o',col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o')
+plot(dens$mids, dens$density/max(dens$density),type='o')#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(dens2$x,freq.dist,type='o',col=2)
+?density
+dens2 <- density(log2(volume), cut=volbins.cut,kernel='gaussian')
+hist
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o')#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+?hist
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]))#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+?denisty
+?density
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', bw="SJ")#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T)
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', adjust=0.5)#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', adjust=2)#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', adjust=1)#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+# create the frequency distribution of Volume#
+              dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', adjust=0.7)#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', adjust=0)#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian', adjust=0.1)#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+t <- time[33]#
+            t <- as.POSIXct(t, origin="1970-01-01", tz='GMT')#
+            stat.subset <- subset(stat, pop== popname & flag==0 & time >=t & time < t+60*time.interval)#
+            opp <- try(get.opp.by.file(opp.dir, stat.subset$file, quantile=50, vct.dir=vct.dir, pop=popname, channel='fsc_small'))#
+            if(class(opp) == "try-error" | nrow(opp) < 10){#
+                next#
+                }
+norm.fsc <- opp[,"fsc_small"]/m.beads#
+                volume <- round(1.918*(norm.fsc^0.524),4)#
+                  if(inst == 740) biomass <- round(2.251*(norm.fsc^1.143),4)#
+                  if(inst == 751) biomass <- round(1.704*(norm.fsc^1.07),4)#
+                  # biomass <- volume * 0.220#
+#
+            # create the frequency distribution of Volume#
+              dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+?density
+dens <- hist(volume, breaks=volbins.cut, plot=F)
+dens
+?hist
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$breaks, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$breaks, dens$density/max(dens$density)[-1],type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$breaks, (dens$density/max(dens$density))[-1],type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+(dens$density/max(dens$density))[-1]
+dens$breaks
+plot(dens$breaks, (dens$density/max(dens$density))[-1],type='o', xlim=range(dens$mids))
+length(dens$breaks)
+length((dens$density/max(dens$density))[-1])
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$breaks[-1], dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$breaks[-174], dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=F)#
+                plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))#
+                dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+dens <- hist(volume, breaks=volbins.cut, plot=T)
+lines(density(volume))
+dens <- hist(volume, breaks=volbins.cut, plot=T)#
+              lines(density(volume))
+plot(dens$mids, dens$density/max(dens$density),type='o', xlim=range(dens$mids))
+lines(density(volume),col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=T)#
+              lines(density(volume),col=2)
+dens <- hist(volume, breaks=volbins.cut, plot=T)#
+              freq.dist <-  dens$density*diff(dens$breaks) # convert density to frequency#
+              lines(density(volume),col=2)
+plot(dens$mids, freq.dist,type='o', xlim=range(dens$mids))
+dens2 <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency#
+                freq.dist <- freq.dist/sum(freq.dist) # normailize the frequency to 1#
+                par(new=T) #
+                plot(2^dens2$x,freq.dist,type='o',col=2, xlim=range(dens$mids))
+sum(freq.dist)
+dens <- density(log2(volume), n=length(volbins.cut),from=log2(volume.range[1]), to=log2(volume.range[2]), kernel='gaussian')#
+                freq.dist <-  dens2$y*diff(dens2$x)[1] # convert density to frequency
+sum(freq.dist)
+###  Encounter rate calculations#
+          r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s; Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,10,by=0.1) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(f * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(f * R * Z)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R*Z# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*f * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)
+frac <- seq(0.0,10,by=0.1) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R*Z# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)
+library(plotrix)#
+#
+cols <- colorRampPalette(c("blue4","royalblue4","deepskyblue3", "seagreen3", "yellow", "orangered2","darkred"))
+cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R*Z# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s; Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,1,by=0.01) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R*Z# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)
+30.66*L^(1.16)
+10^(0.39*log10(L)+0.79)
+0.39*log10(L)+0.79
+plot(L, u)
+r <- seq(1,20,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+#
+plot(L, u)
+plot(L, u, log='xy')
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # clearance rate, cm3/s#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,1,by=0.01) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(10^4*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)
+cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(*u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (µm s-1)", side=4, line=3,cex=cex)
+color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s for Ballistic feeders (encounter rate = clearance rate if 100% capture efficiency )#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,1,by=0.01) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R /24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R/24)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R /24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+cex=0.8#
+          par(mfrow=c(3,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R*Z# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          # plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+          #     i <- 1#
+          #     for(f in frac){#
+          #       t <- f * R*Z# d-1#
+          #       lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+          #       i <- i+1#
+          #       }#
+          #       ylim <- par('usr')[c(3,4)]#
+          #       xlim <- par('usr')[c(1,2)]#
+          #       color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+          #       mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s for Ballistic feeders (encounter rate = clearance rate if 100% capture efficiency )#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,2,by=0.01) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 d-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          # plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+          #     i <- 1#
+          #     for(f in frac){#
+          #       t <- f * R*Z# d-1#
+          #       lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+          #       i <- i+1#
+          #       }#
+          #       ylim <- par('usr')[c(3,4)]#
+          #       xlim <- par('usr')[c(1,2)]#
+          #       color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+          #       mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+400/24
+#  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s for Ballistic feeders (encounter rate = clearance rate if 100% capture efficiency )#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,2,by=0.01) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R/24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s for Ballistic feeders (encounter rate = clearance rate if 100% capture efficiency )#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,2,by=0.01) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R/24)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R/24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)
+abline(h=100,lty=2,lwd=2)
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s for Ballistic feeders (encounter rate = clearance rate if 100% capture efficiency )#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,2,by=0.1) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R/24)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R/24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          # plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+          #     i <- 1#
+          #     for(f in frac){#
+          #       t <- f * R*Z# d-1#
+          #       lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+          #       i <- i+1#
+          #       }#
+          #       ylim <- par('usr')[c(3,4)]#
+          #       xlim <- par('usr')[c(1,2)]#
+          #       color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+          #       mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+              abline(h=100,lty=2,lwd=2)
+frac <- seq(0.0,2,by=0.05) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R/24)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R/24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          # plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+          #     i <- 1#
+          #     for(f in frac){#
+          #       t <- f * R*Z# d-1#
+          #       lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+          #       i <- i+1#
+          #       }#
+          #       ylim <- par('usr')[c(3,4)]#
+          #       xlim <- par('usr')[c(1,2)]#
+          #       color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+          #       mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+              abline(h=100,lty=2,lwd=2)
+r <- seq(1,2,by=0.1) * 10^-4       # grazer radius, cm#
+          #  r = 1.5#
+          L <- r*2                           # grazer diameter, cm#
+          #u <- 30.66*L^(1.16)                # 30.66 swimming speed in cm/s; https://www.researchgate.net/publication/226383062#
+          u <- 10^(0.39*log10(L)+0.79)       # swimming speed Kiorboe 2011; https://doi.org/10.1111/j.1469-185X.2010.00148.x#
+          E <- pi*(r^2)*u                    # encounter rate, cm3/s for Ballistic feeders (encounter rate = clearance rate if 100% capture efficiency )#
+          E <- E * 10^3                      # encounter rate, µL/s#
+          P <- 150                           # number pro/µL#
+          Pprod <- (exp(0.5)-1)* P           # Pro cell production pro/µL/d#
+#
+          R <- E*P                           # pro encountered/sec#
+          R <- R * 60*60*24                     # pro encountered/h#
+          Z <- 0.3             	             # cells/µL of predators#
+          CE <-  seq(0,1,by=0.1)             # capture efficiency range#
+          frac <- seq(0.0,2,by=0.02) # % diet coming from Pro#
+#
+          cex=0.8#
+          par(mfrow=c(2,1), mar=c(4,5,2,6),cex=cex)#
+          plot(L*10^4,R/24, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed \n (cells grazer-1 h-1)',ylim=c(0,max(frac * R/24)))#
+              i <- 1#
+              for(f in frac){#
+                t <- f * R/24# d-1#
+                lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+                i <- i+1#
+                }#
+                ylim <- par('usr')[c(3,4)]#
+                xlim <- par('usr')[c(1,2)]#
+                color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+                mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          # plot(L*10^4,R*Z, type='l', xlab='grazer diameter (µm)', ylab='# Pro removed by grazers \n (cells µL-1 d-1)',ylim=c(0,max(frac * R * Z)))#
+          #     i <- 1#
+          #     for(f in frac){#
+          #       t <- f * R*Z# d-1#
+          #       lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+          #       i <- i+1#
+          #       }#
+          #       ylim <- par('usr')[c(3,4)]#
+          #       xlim <- par('usr')[c(1,2)]#
+          #       color.legend(xlim[2], ylim[1], xlim[2] + 0.01*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+          #       mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+#
+          plot(L*10^4,100*R*Z/Pprod, type='l', xlab='grazer diameter (µm)', ylab='% Pro cell production \n removed by grazers',ylim=c(0,max(100*frac * R * Z/Pprod)))#
+            i <- 1#
+            for(f in frac){#
+              t <- f * 100*R*Z/Pprod# d-1#
+              lines(L*10^4, t,col=cols(length(frac))[i], lwd=2)#
+              i <- i+1#
+              }#
+              ylim <- par('usr')[c(3,4)]#
+              xlim <- par('usr')[c(1,2)]#
+              color.legend(xlim[2], ylim[1], xlim[2] + 0.02*diff(xlim), ylim[2], legend=pretty(u*frac), rect.col=cols(100), gradient='y',align='rb',cex=cex)#
+              mtext("Swimming speed (cm s-1)", side=4, line=3,cex=cex)#
+              abline(h=100,lty=2,lwd=2)
+library(flowCore)#
+library(splancs)#
+library(popcycle)#
+library(plotrix)#
+library(caroline)#
+library(flowDensity)#
+library(flowViz)#
+.rainbow.cols <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan", "#7FFF7F", "yellow","#FF7F00", "red", "#7F0000"))#
+plot.cytogram <- function (evtopp, para.x = "FSC.small.stuff", para.y = "X692.40.small.stuff", ...)#
+{#
+    cols <- colorRampPalette(c("blue4", "royalblue4", "deepskyblue3",#
+        "seagreen3", "yellow", "orangered2", "darkred"))#
+    par(pty = "s")#
+    plot(evtopp[, c(para.x, para.y)], pch = 16, cex = 0.3,col = densCols(evtopp[, c(para.x, para.y)],#
+          colramp = cols), xlim = c(1, 2^16), ylim = c(1, 2^16), ...)#
+          }#
+#
+plot.vct.cytogram <- function (opp, para.x = "fsc_small", para.y = "chl_small", ...)#
+          {#
+      par(pty = "s")#
+      plot(opp[, c(para.x, para.y)], pch = 16, cex = 0.3, col = as.numeric(as.factor(opp$pop)),#
+                    xlim = c(1, 2^16), ylim = c(1, 2^16),  ...)#
+              legend("topleft", legend = (unique(opp$pop)), col = unique(as.numeric(as.factor(opp$pop))),#
+                  pch = 16, pt.cex = 0.6, bty = "n")#
+                    }#
+# plot.cytogram(opp, "FSC.small.stuff","X692.40.small.stuff")
+path <- paste("~/Documents/DATA/SeaFlow/SF_GRADIENTS/Gradient-2.0/Influx/Stations")
+#### INSTALL ssPopModel#
+# in the terminal, cd to where you save ssPopModel git repo.#
+# Then, type in the terminal: R CMD INSTALL ssPopModel#
+# NB: ssPopModel requires the package DEoptim to be installed, so make sure to install DEoptim package first#
+#
+library(ssPopModel)#
+#
 #John#
-path.to.data <- "~/ssPopModel_sensitivity_test-master/ssPopModel_sensitivity_test_data"#
-path.to.git.repository <- "~/ssPopModel_sensitivity_test-master"
-setwd(path.to.git.repository)
-Par <- read.csv("Par.csv")
-path.to.data <- "~/ssPopModel_sensitivity_test/ssPopModel_sensitivity_test_data"
-path.to.git.repository <- "~/ssPopModel_sensitivity_test"
-setwd(path.to.git.repository)
-Par <- read.csv("Par.csv")
-list.dist.10 <- list.dist[59]
-list.output <- list.files("output", "dt=",full.names=T)
-DF <- NULL
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    dt <- as.numeric(unlist(list(strsplit(basename(path.distribution), "dt=")))[2])#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
+path.to.data <- "~/ssPopModel_sensitivity_test/ssPopModel_sensitivity_test_data"#
+path.to.git.repository <- "~/ssPopModel_sensitivity_test"#
+#
+#Francois#
+path.to.git.repository <- "~/Documents/DATA/Codes/ssPopModel_sensitivity_test"#
+path.to.data <- paste0(path.to.git.repository,"/ssPopModel_sensitivity_test_data")#
+# ## CREATE SIZE DISTRIBUTION#
+# #1. to download the data (using DAT)#
+# dat://456f261260e4ae8af7e7dc8b97fdabfdc770f561771e844888b1ef7f59a507ec#
+##
+#2. calculate size distrubution#
+setwd(path.to.data)#
+popname <- "prochloro"#
+time.interval <- 60 #minutes#
+opp.dir <- "SCOPE_6_opp"#
+vct.dir <- "SCOPE_6_vct"#
+db <- "SCOPE_6.db"#
+inst <- "740"
+setwd(path.to.git.repository)#
+Par <- read.csv("Par.csv")#
+## ESTIMATE GROWTH RATE#
+list.dist  <- list.files("input_smooth", "size.distribution_Prochlorococcus",full.names=T)
+path.distribution <- list.dist[55]#
+          print(path.distribution)#
+          load(path.distribution)#
+          size <- unlist(list(strsplit(path.distribution, "_")))[3]#
+          freq.distribution <- as.matrix(distribution[[1]][37:61]) # size data for 1 day only#
+          Ntot <- as.vector(distribution[[2]][37:61])#
+          t <- 1
+size
+unlist(list(strsplit(path.distribution, "_")))[4]
+size.distribution
+dt <- 0.4
+paste0('output_smooth/size_modeloutput_',size,"_dt_",dt)
+size <- unlist(list(strsplit(path.distribution, "_")))[4]
+paste0('output_smooth/size_modeloutput_',size,"_dt_",dt)
+for(dt in seq(5, 20, by=0.5)) {#
+    print(paste0("Time = ", dt))#
+#
+    for(path.distribution in list.dist){#
+              #path.distribution <- list.dist[55]#
+              print(path.distribution)#
+              load(path.distribution)#
+              size <- unlist(list(strsplit(path.distribution, "_")))[4]#
+              freq.distribution <- as.matrix(distribution[[1]][37:61]) # size data for 1 day only#
+              Ntot <- as.vector(distribution[[2]][37:61])#
+              t <- 1#
+                    # calculating division rate based on size#
+                model1 <- run.ssPopModel(freq.distribution, Ntot, Par, time.delay=t, dt=dt)#
+                  save(model1, file=paste0('output_smooth/size_modeloutput_',size,"_dt_",dt))#
+#
+                  # n.distribution <- freq.distribution %*% diag(Ntot)#
+                  # colnames(n.distribution) <- colnames(freq.distribution)#
+                  #plot.size.distribution(freq.distribution, mode="log", type="p", lwd=2)#
+                  #plot.size.distribution(n.distribution, mode="log", type="p", lwd=2)#
     }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, dt, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-par(mfrow=c(3,2),pty='m',cex=1.2)#
-for(param in colnames(DF)[-c(1:3)]){#
-    #param <- 'gmax'#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2),pty='m')#
-for(param in colnames(DF)[-c(1:3)]){#
-    #param <- 'gmax'#
-    plot(DF[which(DF$origin=="biomass"),"dt"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),"dt"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-list.output  <- list.files("output", "modeloutput",full.names=T)
-DF <- NULL
-for(path.distribution in list.output){#
-    #path.distribution <- list.output[1]#
-    print(path.distribution)#
-    load(path.distribution)#
-    size <- as.numeric(unlist(list(strsplit(path.distribution, "_")))[3])#
-    origin <- unlist(list(strsplit(basename(path.distribution), "_")))[1]#
-    if(origin == "biomass"){#
-      params <- model2[,2][[1]]#
-      gr <- model2[,2][[2]]#
-    }#
-    if(origin == "size"){#
-      params <- model1[,2][[1]]#
-      gr <- model1[,2][[2]]#
-    }#
-    df <- data.frame(origin, size, params,gr=sum(gr,na.rm=T))#
-    DF <- data.frame(rbind(DF, df))#
-}
-par(mfrow=c(3,2),pty='m',cex=1.2)#
-for(param in colnames(DF)[-c(1:2)]){#
-    #param <- 'gmax'#
-    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')#
-}
-par(mfrow=c(3,2),pty='m')#
-for(param in colnames(DF)[-c(1:2)]){#
-    #param <- 'gmax'#
-    plot(DF[which(DF$origin=="biomass"),"size"], DF[which(DF$origin=="biomass"),param], ylim=c(range(DF[,param])),type='p',main=paste(param),ylab=NA, xlab=NA)#
-    points(DF[which(DF$origin=="size"),"size"], DF[which(DF$origin=="size"),param],col=2,type='p')#
 }
